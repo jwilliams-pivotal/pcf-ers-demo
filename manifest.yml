@@ -2,8 +2,9 @@
 applications:
 - name: demo-macys
   memory: 512MB
-  instances: 1
+  instances: 2
   path: target/pcf-ers-demo.jar
+  services: [attendees-db]
   buildpack: java_buildpack
   env:
     SPRING_PROFILES_ACTIVE: cloud
