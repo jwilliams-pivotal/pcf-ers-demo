@@ -19,7 +19,7 @@
 				}
 			],
 			"request": {
-				"url": "http://demo-jwilliams-canary.cfapps.io/services",
+				"url": "http://demo-macys.cfapps.io/services",
 				"method": "GET",
 				"header": [],
 				"body": {
@@ -42,7 +42,7 @@
 				}
 			],
 			"request": {
-				"url": "http://demo-jwilliams-canary.cfapps.io/go",
+				"url": "http://demo-macys.cfapps.io/go",
 				"method": "GET",
 				"header": [],
 				"body": {
