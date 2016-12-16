@@ -85,6 +85,9 @@
                         <a
                                 href="javascript:kill();"
                                 class="btn btn-default">Kill</a>
+                        <a
+                            href="javascript:doError();"
+                            class="btn btn-default">Error</a>
                     </div>
                 </div>
             </div>
@@ -131,6 +134,10 @@
 
     function kill() {
         $.get("/services?doit=true");
+    }
+
+    function doError() {
+        $.get("/error");
     }
 
     function startLoad() {

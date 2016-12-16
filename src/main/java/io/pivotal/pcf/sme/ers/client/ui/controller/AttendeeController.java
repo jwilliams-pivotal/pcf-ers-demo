@@ -117,6 +117,17 @@ public class AttendeeController {
 		attendeeService.deleteAll();
 		return attendees(model);
 	}
+
+	@RequestMapping(value = "/error", method = RequestMethod.GET)
+	public String error(Model model) throws Exception {
+		try {
+			throw new RuntimeException("BADCODE");
+		}
+		catch(RuntimeException e){
+			log.error(e);
+		}
+		return "services";
+	}
 	
 
 	/**
