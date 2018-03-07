@@ -15,6 +15,7 @@ run:
   - -exc
   - |
     pcf-ers-demo/mvnw -f pcf-ers-demo/pom.xml package
+    cf local stage pcf-ers-demo -p target/pcf-ers-demo.jar
 
 params:
   MAVEN_BASEDIR: pcf-ers-demo

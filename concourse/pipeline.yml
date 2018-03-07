@@ -15,6 +15,9 @@ groups:
   jobs:
   - teardown
   - setup
+- name: PKS deploy
+  jobs:
+  - build-image
 
 resources:
   - name: pcf-ers-demo
@@ -34,6 +37,13 @@ resources:
     source:
       user: jwilliams-pivotal
       repository: pcf-ers-demo
+  - name: demo-image
+    type: docker-image
+    source:
+      repository: habor.pks.wrightcode.net/demo
+      tag: latest
+      username: admin
+      password: p1v0tal
 
 jobs:
   - name: test
@@ -138,3 +148,14 @@ jobs:
         PCF_SPACE: {{PCF_SPACE}}
         APP_NAME: {{APP_NAME}}
       file: pcf-ers-demo/concourse/tasks/setup.yml
+   - name: build-image
+    plan:
+    - get: pcf-ers-demo
+      trigger: false
+    - task: build-image
+    - put: demo-image
+      params: {file: build-image/demo-image.droplet}
+      params:
+        HARBOR_TARGET_URL: {{HARBOR_TARGET_URL}}
+        HARBOR_USERNAME: {{HARBOR_USERNAME}}
+        HARBOR_PASSWORD: {{HARBOR_PASSWORD}}
