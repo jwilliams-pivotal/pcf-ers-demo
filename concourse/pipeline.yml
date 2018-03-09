@@ -25,6 +25,8 @@ resources:
     source:
       uri: https://github.com/jwilliams-pivotal/pcf-ers-demo
       branch: master
+      username: mwright-pivotal
+      password: {{GIT_PSWD}}
 
   - name: deployment-scripts
     type: git
@@ -40,7 +42,7 @@ resources:
   - name: demo-image
     type: docker-image
     source:
-      repository: habor.pks.wrightcode.net/demo
+      repository: harbor.pks.wrightcode.net/demo
       tag: latest
       username: admin
       password: p1v0tal
@@ -148,14 +150,15 @@ jobs:
         PCF_SPACE: {{PCF_SPACE}}
         APP_NAME: {{APP_NAME}}
       file: pcf-ers-demo/concourse/tasks/setup.yml
-   - name: build-image
+  - name: build-image
     plan:
     - get: pcf-ers-demo
       trigger: false
     - task: build-image
-    - put: demo-image
-      params: {file: build-image/demo-image.droplet}
       params:
         HARBOR_TARGET_URL: {{HARBOR_TARGET_URL}}
         HARBOR_USERNAME: {{HARBOR_USERNAME}}
         HARBOR_PASSWORD: {{HARBOR_PASSWORD}}
+      file: pcf-ers-demo/concourse/tasks/build-image.yml
+    - put: demo-image
+      params: {file: build-image/demo-image.droplet}
