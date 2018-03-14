@@ -5,6 +5,6 @@ applications:
   instances: 2
   path: target/pcf-ers-demo.jar
   services: [attendees-db]
-  buildpack: java_buildpack
+  buildpack: java_buildpack_offline
   env:
     SPRING_PROFILES_ACTIVE: cloud
